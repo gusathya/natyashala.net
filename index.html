@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Natyashala Academy of Fine Arts</title>
+  <meta name="description" content="Natyashala Academy of Fine Arts — a premier institution for classical Indian dance and music. Learn Bharatanatyam, Kathak, Carnatic, and Hindustani music." />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --maroon:   #6B1A1A;
+      --deep-red: #8B0000;
+      --gold:     #C9A84C;
+      --gold-lt:  #E2C97E;
+      --cream:    #FAF3E0;
+      --off-white:#F5ECD7;
+      --dark:     #1A0A0A;
+      --text:     #2C1A1A;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'EB Garamond', Georgia, serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.4rem;
+      letter-spacing: 0.4rem;
+      margin: 0.4rem 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(26, 10, 10, 0.97);
+      border-bottom: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 4rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+
+    .nav-brand .logo-circle {
+      width: 42px; height: 42px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      background: transparent;
+      flex-shrink: 0;
+    }
+
+    .nav-brand-text { display: flex; flex-direction: column; }
+    .nav-brand-text .brand-main { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--gold-lt); letter-spacing: 0.1rem; line-height: 1.2; }
+    .nav-brand-text .brand-sub { font-family: 'Cormorant Garamond', serif; font-size: 0.72rem; color: #b09060; letter-spacing: 0.22rem; text-transform: uppercase; }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.15rem; text-transform: uppercase; color: #d4b87a; text-decoration: none; transition: color 0.25s; }
+    .nav-links a:hover { color: var(--gold-lt); }
+    .nav-cta { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.12rem; text-transform: uppercase; color: var(--dark) !important; background: var(--gold); padding: 0.45rem 1.1rem; border-radius: 2px; transition: background 0.25s !important; }
+    .nav-cta:hover { background: var(--gold-lt) !important; color: var(--dark) !important; }
+
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, rgba(107,26,26,0.88) 0%, rgba(26,10,10,0.92) 60%), url('https://images.unsplash.com/photo-1547153760-18fc86324498?w=1600&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 6rem 2rem 4rem; position: relative;
+    }
+    #hero::before { content: ''; position: absolute; inset: 5rem 3rem 3rem; border: 1px solid rgba(201,168,76,0.3); pointer-events: none; }
+    #hero::after { content: ''; position: absolute; inset: 5.4rem 3.4rem 3.4rem; border: 1px solid rgba(201,168,76,0.12); pointer-events: none; }
+    .hero-inner { max-width: 760px; position: relative; z-index: 1; }
+    .hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: 0.82rem; letter-spacing: 0.45rem; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 0.4rem; }
+    .hero-title span { color: var(--gold-lt); }
+    .hero-subtitle { font-family: 'Cinzel', serif; font-size: clamp(0.85rem, 2vw, 1.1rem); font-weight: 400; color: #c8a96e; letter-spacing: 0.28rem; text-transform: uppercase; margin-bottom: 1.6rem; }
+    .hero-divider { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin: 1.4rem 0; color: var(--gold); }
+    .hero-divider::before, .hero-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); max-width: 140px; }
+    .hero-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: #e8d5b0; margin-bottom: 2.4rem; line-height: 1.9; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.18rem; text-transform: uppercase; padding: 0.9rem 2.2rem; background: var(--gold); color: var(--dark); text-decoration: none; border-radius: 2px; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .btn-outline { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.18rem; text-transform: uppercase; padding: 0.9rem 2.2rem; border: 1px solid var(--gold); color: var(--gold-lt); text-decoration: none; border-radius: 2px; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn-outline:hover { background: rgba(201,168,76,0.12); transform: translateY(-1px); }
+
+    section { padding: 5rem 2rem; }
+    .section-header { text-align: center; max-width: 620px; margin: 0 auto 3.5rem; }
+    .section-eyebrow { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.38rem; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 600; color: var(--maroon); line-height: 1.25; }
+    .gold-line { width: 60px; height: 2px; background: linear-gradient(to right, var(--maroon), var(--gold), var(--maroon)); margin: 1rem auto; }
+    .section-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; color: #6B5050; }
+
+    #about { background: var(--off-white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1060px; margin: 0 auto; align-items: center; }
+    .about-art { position: relative; display: flex; align-items: center; justify-content: center; }
+    .about-art svg { width: 340px; height: 340px; filter: drop-shadow(0 4px 24px rgba(107,26,26,0.18)); }
+    .about-text h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--maroon); margin-bottom: 1rem; }
+    .about-text p { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; color: var(--text); margin-bottom: 1rem; line-height: 1.9; }
+    .about-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1.5rem; }
+    .pillar { display: flex; align-items: flex-start; gap: 0.6rem; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--text); }
+    .pillar-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; margin-top: 0.52rem; flex-shrink: 0; }
+
+    #programs { background: var(--cream); }
+    .programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.8rem; max-width: 1100px; margin: 0 auto; }
+    .program-card { background: #fff; border: 1px solid #e8d8b8; border-radius: 4px; padding: 2.2rem 1.8rem; text-align: center; transition: box-shadow 0.3s, transform 0.3s; position: relative; overflow: hidden; }
+    .program-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, var(--maroon), var(--gold), var(--maroon)); }
+    .program-card:hover { box-shadow: 0 8px 32px rgba(107,26,26,0.14); transform: translateY(-4px); }
+    .program-icon { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
+    .program-card h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--maroon); margin-bottom: 0.8rem; }
+    .program-card p { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: #5a4040; line-height: 1.75; margin-bottom: 1.2rem; }
+    .program-tag { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.12rem; text-transform: uppercase; color: var(--maroon); border: 1px solid var(--gold); padding: 0.2rem 0.7rem; border-radius: 2px; margin: 0.2rem; }
+
+    #why { background: var(--dark); color: #e8d5b0; position: relative; overflow: hidden; }
+    #why::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(201,168,76,0.03) 0px, rgba(201,168,76,0.03) 1px, transparent 1px, transparent 40px); }
+    #why .section-title { color: var(--gold-lt); }
+    #why .section-desc { color: #b8a080; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1060px; margin: 0 auto; position: relative; }
+    .feature { text-align: center; padding: 1.8rem; border: 1px solid rgba(201,168,76,0.2); border-radius: 4px; background: rgba(255,255,255,0.03); }
+    .feature-icon { font-size: 2.4rem; margin-bottom: 0.8rem; }
+    .feature h4 { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--gold-lt); margin-bottom: 0.6rem; letter-spacing: 0.06rem; }
+    .feature p { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: #b8a080; line-height: 1.7; }
+
+    #gallery { background: var(--off-white); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 0.8rem; max-width: 1060px; margin: 0 auto; }
+    .gallery-item { border-radius: 3px; overflow: hidden; position: relative; background: var(--maroon); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(0.15) brightness(0.92); transition: transform 0.4s, filter 0.4s; }
+    .gallery-item:hover img { transform: scale(1.04); filter: sepia(0) brightness(1); }
+    .gallery-item:first-child { grid-column: 1 / 2; grid-row: 1 / 3; aspect-ratio: 3/4; }
+    .gallery-item:not(:first-child) { aspect-ratio: 4/3; }
+    .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(107,26,26,0.6), transparent); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 1rem; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.12rem; color: var(--gold-lt); }
+
+    #testimonials { background: var(--cream); }
+    .testimonials-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1060px; margin: 0 auto; }
+    .testimonial { background: #fff; border: 1px solid #e8d8b8; border-radius: 4px; padding: 2rem; position: relative; }
+    .testimonial::before { content: '\u201C'; font-family: 'Cormorant Garamond', serif; font-size: 5rem; line-height: 1; color: var(--gold); opacity: 0.35; position: absolute; top: 0.5rem; left: 1rem; }
+    .testimonial p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: #5a4040; line-height: 1.8; margin-bottom: 1.2rem; position: relative; z-index: 1; padding-top: 1rem; }
+    .testimonial-author { font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.1rem; color: var(--maroon); }
+    .testimonial-role { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: #999; }
+
+    #contact { background: var(--off-white); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; max-width: 1000px; margin: 0 auto; align-items: start; }
+    .contact-info h3 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--maroon); margin-bottom: 1.4rem; }
+    .contact-detail { display: flex; gap: 0.8rem; margin-bottom: 1.2rem; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--text); }
+    .contact-detail-icon { font-size: 1.2rem; color: var(--gold); flex-shrink: 0; margin-top: 0.1rem; }
+    .contact-detail strong { display: block; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.1rem; text-transform: uppercase; color: var(--maroon); margin-bottom: 0.2rem; }
+    .contact-form { background: #fff; border: 1px solid #e8d8b8; border-radius: 4px; padding: 2.2rem; }
+    .contact-form h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--maroon); margin-bottom: 1.6rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.12rem; text-transform: uppercase; color: var(--maroon); margin-bottom: 0.4rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.7rem 1rem; border: 1px solid #d8c8a8; border-radius: 2px; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--text); background: var(--cream); transition: border-color 0.2s; outline: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .submit-btn { width: 100%; font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.18rem; text-transform: uppercase; padding: 0.9rem; background: var(--maroon); color: var(--gold-lt); border: none; border-radius: 2px; cursor: pointer; transition: background 0.25s; margin-top: 0.5rem; }
+    .submit-btn:hover { background: #8B0000; }
+
+    footer { background: var(--dark); color: #b8a080; padding: 3.5rem 2rem 1.8rem; text-align: center; border-top: 1px solid rgba(201,168,76,0.3); }
+    .footer-brand { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold-lt); margin-bottom: 0.4rem; }
+    .footer-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; color: #8a7060; margin-bottom: 2rem; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.6rem; list-style: none; margin-bottom: 2rem; }
+    .footer-links a { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.15rem; text-transform: uppercase; color: #b8a080; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-lt); }
+    .footer-copy { font-size: 0.82rem; color: #5a4a3a; margin-top: 1.5rem; border-top: 1px solid rgba(201,168,76,0.1); padding-top: 1.2rem; }
+
+    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: all 0.3s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0.8rem 1.4rem; }
+      .hamburger { display: flex; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(26,10,10,0.99); flex-direction: column; gap: 0; padding: 1rem 0; border-top: 1px solid var(--gold); }
+      .nav-links.open { display: flex; }
+      .nav-links li { text-align: center; padding: 0.7rem 0; }
+      .about-grid, .contact-layout { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-column: 1/3; grid-row: auto; aspect-ratio: 16/9; }
+      .form-row { grid-template-columns: 1fr; }
+      #hero::before, #hero::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">
+    <div class="logo-circle">𝒩</div>
+    <div class="nav-brand-text">
+      <span class="brand-main">Natyashala</span>
+      <span class="brand-sub">Academy of Fine Arts</span>
+    </div>
+  </a>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact" class="nav-cta">Enroll Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-tagline">Est. Natyashala Academy</p>
+    <h1 class="hero-title">Where Art Meets<br/><span>Tradition</span></h1>
+    <p class="hero-subtitle">Academy of Fine Arts</p>
+    <div class="hero-divider"><span>❧</span></div>
+    <p class="hero-desc">A sanctuary for classical Indian dance and music — nurturing the timeless<br/>arts of Bharatanatyam, Kathak, Carnatic &amp; Hindustani traditions.</p>
+    <div class="hero-btns">
+      <a href="#programs" class="btn-primary">Explore Programs</a>
+      <a href="#contact" class="btn-outline">Enroll Today</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <p class="section-eyebrow">Our Story</p>
+    <h2 class="section-title">A Legacy of Classical Excellence</h2>
+    <div class="gold-line"></div>
+    <p class="section-desc">Rooted in tradition, blossoming through dedicated practice</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-art">
+      <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="mg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C9A84C" stop-opacity="0.18"/><stop offset="100%" stop-color="#6B1A1A" stop-opacity="0.05"/></radialGradient></defs>
+        <circle cx="170" cy="170" r="168" fill="url(#mg)" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="4 3"/>
+        <circle cx="170" cy="170" r="138" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="170" cy="170" r="108" fill="none" stroke="#6B1A1A" stroke-width="0.6" opacity="0.3"/>
+        <g transform="translate(170,170)">
+          <ellipse cx="0" cy="-96" rx="18" ry="36" fill="#C9A84C" opacity="0.25"/>
+          <ellipse cx="0" cy="-96" rx="9" ry="18" fill="#6B1A1A" opacity="0.35"/>
+          <g transform="rotate(45)"><ellipse cx="0" cy="-96" rx="18" ry="36" fill="#C9A84C" opacity="0.2"/></g>
+          <g transform="rotate(90)"><ellipse cx="0" cy="-96" rx="18" ry="36" fill="#C9A84C" opacity="0.25"/><ellipse cx="0" cy="-96" rx="9" ry="18" fill="#6B1A1A" opacity="0.35"/></g>
+          <g transform="rotate(135)"><ellipse cx="0" cy="-96" rx="18" ry="36" fill="#C9A84C" opacity="0.2"/></g>
+          <g transform="rotate(180)"><ellipse cx="0" cy="-96" rx="18" ry="36" fill="#C9A84C" opacity="0.25"/><ellipse cx="0" cy="-96" rx="9" ry="18" fill="#6B1A1A" opacity="0.35"/></g>
+          <g transform="rotate(225)"><ellipse cx="0" cy="-96" rx="18" ry="36" fill="#C9A84C" opacity="0.2"/></g>
+          <g transform="rotate(270)"><ellipse cx="0" cy="-96" rx="18" ry="36" fill="#C9A84C" opacity="0.25"/><ellipse cx="0" cy="-96" rx="9" ry="18" fill="#6B1A1A" opacity="0.35"/></g>
+          <g transform="rotate(315)"><ellipse cx="0" cy="-96" rx="18" ry="36" fill="#C9A84C" opacity="0.2"/></g>
+          <g transform="rotate(22.5)"><ellipse cx="0" cy="-56" rx="10" ry="22" fill="#C9A84C" opacity="0.35"/></g>
+          <g transform="rotate(67.5)"><ellipse cx="0" cy="-56" rx="10" ry="22" fill="#C9A84C" opacity="0.35"/></g>
+          <g transform="rotate(112.5)"><ellipse cx="0" cy="-56" rx="10" ry="22" fill="#C9A84C" opacity="0.35"/></g>
+          <g transform="rotate(157.5)"><ellipse cx="0" cy="-56" rx="10" ry="22" fill="#C9A84C" opacity="0.35"/></g>
+          <g transform="rotate(202.5)"><ellipse cx="0" cy="-56" rx="10" ry="22" fill="#C9A84C" opacity="0.35"/></g>
+          <g transform="rotate(247.5)"><ellipse cx="0" cy="-56" rx="10" ry="22" fill="#C9A84C" opacity="0.35"/></g>
+          <g transform="rotate(292.5)"><ellipse cx="0" cy="-56" rx="10" ry="22" fill="#C9A84C" opacity="0.35"/></g>
+          <g transform="rotate(337.5)"><ellipse cx="0" cy="-56" rx="10" ry="22" fill="#C9A84C" opacity="0.35"/></g>
+          <circle r="30" fill="#6B1A1A" opacity="0.15"/>
+          <circle r="18" fill="#C9A84C" opacity="0.22"/>
+          <circle r="8" fill="#6B1A1A" opacity="0.4"/>
+          <circle r="3" fill="#C9A84C" opacity="0.9"/>
+        </g>
+        <circle cx="36" cy="36" r="3" fill="#C9A84C" opacity="0.5"/>
+        <circle cx="304" cy="36" r="3" fill="#C9A84C" opacity="0.5"/>
+        <circle cx="36" cy="304" r="3" fill="#C9A84C" opacity="0.5"/>
+        <circle cx="304" cy="304" r="3" fill="#C9A84C" opacity="0.5"/>
+        <text x="170" y="304" text-anchor="middle" font-family="'Cinzel', serif" font-size="11" fill="#C9A84C" opacity="0.6" letter-spacing="3">NATYASHALA</text>
+      </svg>
+    </div>
+    <div class="about-text">
+      <h3>Where Every Movement Tells a Story</h3>
+      <p>Natyashala Academy of Fine Arts is dedicated to preserving and propagating the rich heritage of India's classical arts. Our academy provides an immersive environment where students discover the profound depths of dance and music — arts that speak to the soul.</p>
+      <p>Under the guidance of accomplished gurus with decades of experience, students embark on a transformative journey that goes beyond mere performance — developing discipline, cultural sensitivity, and artistic sensibility.</p>
+      <div class="about-pillars">
+        <div class="pillar"><div class="pillar-dot"></div><span>Authentic Classical Training</span></div>
+        <div class="pillar"><div class="pillar-dot"></div><span>All Skill Levels Welcome</span></div>
+        <div class="pillar"><div class="pillar-dot"></div><span>Performance Opportunities</span></div>
+        <div class="pillar"><div class="pillar-dot"></div><span>Theory &amp; Aesthetics</span></div>
+        <div class="pillar"><div class="pillar-dot"></div><span>Children's Programs</span></div>
+        <div class="pillar"><div class="pillar-dot"></div><span>Adult Beginner Batches</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="section-header">
+    <p class="section-eyebrow">What We Teach</p>
+    <h2 class="section-title">Our Programs</h2>
+    <div class="gold-line"></div>
+    <p class="section-desc">Classical arts handed down through generations, taught with devotion</p>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card">
+      <span class="program-icon">💃</span>
+      <h3>Bharatanatyam</h3>
+      <p>One of India's oldest classical dance forms, originating from Tamil Nadu. Learn the precise Nritta (pure dance), Nritya (expressional dance), and Natya (drama) components.</p>
+      <span class="program-tag">Beginner</span><span class="program-tag">Intermediate</span><span class="program-tag">Advanced</span>
+    </div>
+    <div class="program-card">
+      <span class="program-icon">🕺</span>
+      <h3>Kathak</h3>
+      <p>The lyrical dance of North India, known for its swift spins, intricate footwork, and expressive storytelling. Master the grace of both Lucknow and Jaipur gharanas.</p>
+      <span class="program-tag">Beginner</span><span class="program-tag">Intermediate</span><span class="program-tag">Advanced</span>
+    </div>
+    <div class="program-card">
+      <span class="program-icon">🎵</span>
+      <h3>Carnatic Music</h3>
+      <p>The classical music of South India — rooted in devotion and raga intricacy. Vocal training covering Swarajathi, Varnam, Kriti compositions and ragas.</p>
+      <span class="program-tag">Vocal</span><span class="program-tag">Theory</span><span class="program-tag">All Ages</span>
+    </div>
+    <div class="program-card">
+      <span class="program-icon">🎶</span>
+      <h3>Hindustani Music</h3>
+      <p>The classical music tradition of North India with rich raga elaborations and Khayal, Thumri, and Bhajan. Develop a deep connection with melody and emotion.</p>
+      <span class="program-tag">Vocal</span><span class="program-tag">Ragas</span><span class="program-tag">All Ages</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-header">
+    <p class="section-eyebrow">Why Choose Us</p>
+    <h2 class="section-title">The Natyashala Difference</h2>
+    <div class="gold-line"></div>
+    <p class="section-desc">More than a school — a community rooted in artistic devotion</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature"><div class="feature-icon">🏛️</div><h4>Expert Gurus</h4><p>Trained under lineage-holders with decades of stage and teaching experience.</p></div>
+    <div class="feature"><div class="feature-icon">🪷</div><h4>Holistic Approach</h4><p>We teach not just technique but also the spiritual and cultural context of each art.</p></div>
+    <div class="feature"><div class="feature-icon">🎭</div><h4>Stage Performances</h4><p>Regular recitals, Arangetrams, and festival performances for all students.</p></div>
+    <div class="feature"><div class="feature-icon">👨‍👩‍👧</div><h4>All Ages Welcome</h4><p>From young beginners (age 4+) to adult learners discovering classical arts.</p></div>
+    <div class="feature"><div class="feature-icon">🎅</div><h4>Exam &amp; Certification</h4><p>Students can appear for graded exams and earn recognized certifications.</p></div>
+    <div class="feature"><div class="feature-icon">🌐</div><h4>Online Classes</h4><p>Flexible online sessions available for students who cannot attend in person.</p></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header">
+    <p class="section-eyebrow">Moments Captured</p>
+    <h2 class="section-title">Gallery</h2>
+    <div class="gold-line"></div>
+    <p class="section-desc">A glimpse into the world of Natyashala</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1547153760-18fc86324498?w=600&q=75" alt="Classical Dance" loading="lazy"/><div class="gallery-overlay"><span>Classical Dance</span></div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=75" alt="Music Training" loading="lazy"/><div class="gallery-overlay"><span>Music Training</span></div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75" alt="Bharatanatyam" loading="lazy"/><div class="gallery-overlay"><span>Bharatanatyam</span></div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504680177321-2e6a879aac86?w=600&q=75" alt="Stage Performance" loading="lazy"/><div class="gallery-overlay"><span>Stage Performance</span></div></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1603808033192-082d6919d3e1?w=600&q=75" alt="Kathak" loading="lazy"/><div class="gallery-overlay"><span>Kathak</span></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header">
+    <p class="section-eyebrow">Student Stories</p>
+    <h2 class="section-title">What Our Students Say</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="testimonials-row">
+    <div class="testimonial"><p>Natyashala has transformed my understanding of Bharatanatyam. The guru's attention to detail and patience is unparalleled. My Arangetram was a dream come true!</p><div class="testimonial-author">Priya Krishnamurthy</div><div class="testimonial-role">Bharatanatyam Student, 6 years</div></div>
+    <div class="testimonial"><p>As an adult learner picking up Carnatic music after 30 years, I was nervous. The academy made me feel so welcome and my progress has been remarkable.</p><div class="testimonial-author">Ramesh Iyer</div><div class="testimonial-role">Carnatic Vocal Student</div></div>
+    <div class="testimonial"><p>My daughter has been learning Kathak here for 3 years. The discipline, grace, and confidence she has gained are beyond what I could have hoped for. Truly a remarkable institution.</p><div class="testimonial-author">Sunita Mehta</div><div class="testimonial-role">Parent of Kathak Student</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <p class="section-eyebrow">Begin Your Journey</p>
+    <h2 class="section-title">Contact &amp; Enroll</h2>
+    <div class="gold-line"></div>
+    <p class="section-desc">Reach out to us and take the first step into the classical arts</p>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info">
+      <h3>Get In Touch</h3>
+      <div class="contact-detail"><span class="contact-detail-icon">📍</span><div><strong>Address</strong>Natyashala Academy of Fine Arts<br/>Your Address Here<br/>City, State — PIN Code</div></div>
+      <div class="contact-detail"><span class="contact-detail-icon">📞</span><div><strong>Phone</strong>+91 [Your Number]</div></div>
+      <div class="contact-detail"><span class="contact-detail-icon">✉️</span><div><strong>Email</strong>info@natyashala.net</div></div>
+      <div class="contact-detail"><span class="contact-detail-icon">🕐</span><div><strong>Class Timings</strong>Mon – Sat: 8:00 AM – 8:00 PM<br/>Sunday: Special batches</div></div>
+    </div>
+    <div class="contact-form">
+      <h3>Send an Enquiry</h3>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" name="first_name" placeholder="Priya" required/></div>
+          <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" name="last_name" placeholder="Sharma" required/></div>
+        </div>
+        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="you@email.com" required/></div>
+        <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" placeholder="+91 98765 43210"/></div>
+        <div class="form-group"><label for="program">Interested Program</label>
+          <select id="program" name="program">
+            <option value="">— Select a Program —</option>
+            <option>Bharatanatyam</option><option>Kathak</option><option>Carnatic Music</option><option>Hindustani Music</option><option>Multiple Programs</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us about yourself or ask any questions…"></textarea></div>
+        <button type="submit" class="submit-btn">Send Enquiry →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Natyashala Academy of Fine Arts</div>
+  <div class="footer-tagline">Preserving the timeless arts of India</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li><li><a href="#programs">Programs</a></li>
+    <li><a href="#gallery">Gallery</a></li><li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="ornament">❖ ❖ ❖</div>
+  <div class="footer-copy">&copy; 2026 Natyashala Academy of Fine Arts &middot; natyashala.net &middot; All rights reserved</div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => navLinks.classList.remove('open')); });
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.style.boxShadow = window.scrollY > 40 ? '0 2px 20px rgba(0,0,0,0.5)' : 'none'; });
+</script>
+</body>
+</html>

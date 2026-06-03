@@ -371,6 +371,7 @@
           <button class="example" type="button">Add announcement: Summer admissions are open for Bharatanatyam and music batches.</button>
           <button class="example" type="button">Set event title to Natyashala Annual Day 2026</button>
           <button class="example" type="button">Set phone to +91 80079 89358</button>
+          <button class="example" type="button">Add Instagram pages: @charanyanatyashala, @natyashala.in</button>
         </div>
       </section>
 
@@ -556,6 +557,60 @@
       ].join("\n");
     }
 
+    function getInstagramHandle(value) {
+      const match = value.match(/instagram\.com\/([A-Za-z0-9._]+)/i) || value.match(/^@?([A-Za-z0-9._]+)$/);
+      return match ? match[1].replace(/\.+$/, "") : "";
+    }
+
+    function extractInstagramPages(text) {
+      const pages = [];
+      const seen = new Set();
+      const urlPattern = /https?:\/\/(?:www\.)?instagram\.com\/[A-Za-z0-9._]+\/?/gi;
+      const handlePattern = /@[A-Za-z0-9._]+/g;
+
+      function addPage(rawValue) {
+        const handle = getInstagramHandle(rawValue);
+        if (!handle || seen.has(handle.toLowerCase())) return;
+        seen.add(handle.toLowerCase());
+        pages.push({
+          handle,
+          url: `https://www.instagram.com/${handle}`
+        });
+      }
+
+      (text.match(urlPattern) || []).forEach(addPage);
+      (text.match(handlePattern) || []).forEach(addPage);
+      return pages;
+    }
+
+    function addInstagramPages(source, command) {
+      const pages = extractInstagramPages(command);
+      if (!pages.length) {
+        throw new Error("Please include the Instagram handles or URLs, for example: Add Instagram pages: @charanyanatyashala, @natyashala.in");
+      }
+
+      const footerMatch = source.match(/(<div class="footer-social">)([\s\S]*?)(\s*<\/div>)/m);
+      if (!footerMatch) {
+        throw new Error("I could not find the footer social links.");
+      }
+
+      let links = footerMatch[2];
+      const additions = [];
+      pages.forEach(page => {
+        if (links.toLowerCase().includes(`instagram.com/${page.handle.toLowerCase()}`)) {
+          return;
+        }
+        additions.push(`    <a href="${page.url}" target="_blank" rel="noopener">&#x1F4F7; Instagram @${htmlEscape(page.handle)}</a>`);
+      });
+
+      if (!additions.length) {
+        throw new Error("Those Instagram pages are already listed in the footer.");
+      }
+
+      links = `${links.trimEnd()}\n${additions.join("\n")}\n`;
+      return source.replace(footerMatch[0], `${footerMatch[1]}${links}${footerMatch[3]}`);
+    }
+
     function draftChange(command) {
       if (!state.source) {
         throw new Error("Load the site first.");
@@ -582,6 +637,10 @@
         return next;
       }
 
+      if (/\b(insta|instagram)\b/i.test(trimmed) && /\b(add|update|put|include)\b/i.test(trimmed)) {
+        return addInstagramPages(next, trimmed);
+      }
+
       const eventMatch = trimmed.match(/^set event title to\s+(.+)$/i);
       if (eventMatch) {
         next = next.replace(/(<div class="event-banner">[\s\S]*?<h2 class="event-banner-title">)([\s\S]*?)(<\/h2>)/m, `$1${htmlEscape(eventMatch[1])}$3`);
@@ -602,7 +661,7 @@
         return next;
       }
 
-      throw new Error("I can draft simple commands today: Change \"old\" to \"new\", Add announcement: ..., Set event title to ..., or Set phone to ...");
+      throw new Error("I can draft simple commands today: Change \"old\" to \"new\", Add announcement: ..., Add Instagram pages: @handle, Set event title to ..., or Set phone to ...");
     }
 
     function renderDiff(before, after) {
